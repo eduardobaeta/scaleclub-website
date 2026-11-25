@@ -1,0 +1,28 @@
+---
+import Section from '@/components/layout/Section.astro';
+import FormPanel from '@/components/ui/FormPanel.astro';
+import StepList from '@/components/ui/StepList.astro';
+import { ebookContent } from '@/config/content/double-diamond';
+import { EbookRequestForm } from '@/features/leads';
+
+const { id, title, lead, steps, form } = ebookContent;
+---
+
+<Section id={id}>
+  <div class="grid gap-12 lg:grid-cols-[1fr_25rem] lg:gap-20">
+    <div>
+      <h2 class="type-heading-sm text-foreground" data-reveal>
+        {title}
+      </h2>
+      <p class="type-body mt-4 max-w-copy text-soft-foreground" data-reveal>
+        {lead}
+      </p>
+      <div class="mt-10">
+        <StepList steps={steps} />
+      </div>
+    </div>
+    <FormPanel title={form.title} description={form.description}>
+      <EbookRequestForm />
+    </FormPanel>
+  </div>
+</Section>

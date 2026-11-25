@@ -1,0 +1,80 @@
+---
+import { ArrowDown, CalendarDays, Check, Minus } from '@lucide/astro';
+import Section from '@/components/layout/Section.astro';
+import Button from '@/components/ui/Button.astro';
+import Pill from '@/components/ui/Pill.astro';
+import { tableInvitation } from '@/config/content/double-diamond';
+
+const { eyebrow, title, lead, action, note, lesson, event } = tableInvitation;
+---
+
+<Section>
+  <div
+    class="relative grid gap-10 overflow-hidden rounded-3xl bg-card p-6 md:p-12 lg:grid-cols-[1fr_26rem] lg:items-center lg:gap-16"
+    data-reveal
+  >
+    <div class="relative">
+      <Pill>
+        <CalendarDays slot="icon" class="size-4 text-primary" aria-hidden="true" />
+        {eyebrow}
+      </Pill>
+      <h2 class="type-heading-sm mt-6 max-w-[30rem] text-foreground">{title}</h2>
+      <p class="type-body mt-4 max-w-[33rem] text-soft-foreground">{lead}</p>
+      <div class="mt-8">
+        <Button href={action.href}>{action.label}</Button>
+      </div>
+      <p class="type-caption mt-4 max-w-[28rem] text-muted-foreground">{note}</p>
+    </div>
+
+    <div class="relative">
+      <div class="rounded-2xl bg-muted px-6 py-5">
+        <div class="flex items-baseline justify-between gap-4">
+          <p class="type-body-sm font-medium text-soft-foreground">{lesson.title}</p>
+          <p class="type-caption text-subtle-foreground">{lesson.caption}</p>
+        </div>
+        <ul class="mt-6 space-y-2.5">
+          {lesson.items.map((item) => (
+            <li class="type-body-sm flex items-center gap-3 text-muted-foreground">
+              <span class="grid size-5 shrink-0 place-items-center rounded-full bg-accent text-subtle-foreground">
+                <Minus class="size-3" aria-hidden="true" />
+              </span>
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="relative z-10 -my-2.5 flex justify-center" aria-hidden="true">
+        <span class="grid size-8 place-items-center rounded-full bg-primary text-primary-foreground shadow-glow-sm">
+          <ArrowDown class="size-4" />
+        </span>
+      </div>
+
+      <div class="relative overflow-hidden rounded-2xl bg-background p-6 shadow-glow">
+        <div
+          class="pointer-events-none absolute -top-24 -right-20 size-64 rounded-full bg-primary/35 blur-3xl"
+          aria-hidden="true"
+        ></div>
+        <div
+          class="pointer-events-none absolute -bottom-28 -left-16 size-56 rounded-full bg-highlight-deep/40 blur-3xl"
+          aria-hidden="true"
+        ></div>
+        <div class="relative flex items-center justify-between gap-4">
+          <p class="type-body-sm font-medium text-primary">{event.title}</p>
+          <p class="type-badge rounded-full bg-primary px-2.5 py-1 text-primary-foreground">{event.badge}</p>
+        </div>
+        <p class="type-title relative mt-4 text-foreground">{event.caption}</p>
+        <ul class="relative mt-5 space-y-3">
+          {event.items.map((item) => (
+            <li class="type-body-sm flex items-start gap-3 font-medium text-foreground">
+              <span class="mt-px grid size-5 shrink-0 place-items-center rounded-full bg-primary/15 text-primary">
+                <Check class="size-3" aria-hidden="true" />
+              </span>
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+</Section>

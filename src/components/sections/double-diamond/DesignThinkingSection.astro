@@ -1,0 +1,70 @@
+---
+import { ArrowLeftRight, Lightbulb, PencilRuler, RefreshCw, FaceSlightlySmiling, X } from '@lucide/astro';
+import Pill from '@/components/ui/Pill.astro';
+import { designThinkingContent, type PrincipleIcon } from '@/config/content/double-diamond';
+
+const { id, eyebrow, title, lead, facts, principlesTitle, principles, mistakesTitle, mistakes } = designThinkingContent;
+const principleIcons: Record<PrincipleIcon, typeof FaceSlightlySmiling> = {
+  people: FaceSlightlySmiling,
+  visual: PencilRuler,
+  collaboration: ArrowLeftRight,
+  iteration: RefreshCw,
+};
+---
+
+<section id={id} class="relative">
+  <div class="container-site py-20 md:py-30 lg:py-35">
+    <Pill data-reveal="fade">
+      <Lightbulb slot="icon" class="size-4 text-primary" aria-hidden="true" />
+      {eyebrow}
+    </Pill>
+    <h2 class="type-section mt-6 text-foreground" data-reveal>
+      {title}
+    </h2>
+    <p class="type-lead mt-4 max-w-copy text-soft-foreground" data-reveal>
+      {lead}
+    </p>
+
+    <dl class="mt-10 grid gap-2 md:grid-cols-3">
+      {facts.map((fact) => (
+        <div class="flex flex-col rounded-2xl bg-card p-6 md:p-7" data-reveal>
+          <dt class="type-year text-primary">{fact.value}</dt>
+          <dd class="type-body-sm mt-8 text-muted-foreground">{fact.description}</dd>
+        </div>
+      ))}
+    </dl>
+
+    <h3 class="type-heading-sm mt-16 text-foreground" data-reveal>
+      {principlesTitle}
+    </h3>
+    <ul class="mt-6 grid gap-2 md:grid-cols-2 lg:grid-cols-4">
+      {principles.map((principle) => {
+        const Icon = principleIcons[principle.icon];
+        return (
+          <li class="rounded-2xl border border-border p-6" data-reveal>
+            <span class="grid size-9 place-items-center rounded-lg bg-highlight-deep/40 text-primary">
+              <Icon class="size-4" aria-hidden="true" />
+            </span>
+            <h4 class="type-title mt-6 text-foreground">{principle.title}</h4>
+            <p class="type-body-sm mt-2 text-muted-foreground">{principle.description}</p>
+          </li>
+        );
+      })}
+    </ul>
+
+    <div class="mt-8 rounded-2xl bg-card p-6 md:p-10" data-reveal>
+      <h3 class="type-heading-sm text-foreground">{mistakesTitle}</h3>
+      <ul class="mt-6 grid gap-6 md:grid-cols-3">
+        {mistakes.map((mistake) => (
+          <li class="flex gap-3">
+            <X class="mt-0.5 size-4 shrink-0 text-primary" aria-hidden="true" />
+            <span>
+              <span class="type-step-title block text-foreground">{mistake.title}</span>
+              <span class="type-body-sm mt-1 block text-muted-foreground">{mistake.description}</span>
+            </span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,54 @@
+---
+import { Image } from 'astro:assets';
+import { phasesContent } from '@/config/content/double-diamond';
+
+const { unlit, stages, phases } = phasesContent.diagram;
+const lastStage = stages.length - 1;
+---
+
+<figure>
+  <div class="relative">
+    <Image
+      src={unlit}
+      alt=""
+      widths={[800, 1280, 1672]}
+      sizes="(min-width: 1200px) 1220px, 100vw"
+      format="webp"
+      quality={80}
+      class="w-full"
+      loading="lazy"
+    />
+    {stages.map((stage, index) => (
+      <Image
+        src={stage}
+        alt=""
+        widths={[800, 1280, 1672]}
+        sizes="(min-width: 1200px) 1220px, 100vw"
+        format="webp"
+        quality={80}
+        class:list={[
+          'absolute inset-0 w-full transition-opacity duration-1000 ease-(--easing-standard)',
+          'not-data-[state=current]:opacity-0',
+          index === lastStage && 'data-[state=done]:opacity-100!',
+        ]}
+        data-step-item
+        data-step-index={index}
+        data-state={index === lastStage ? 'done' : 'hidden'}
+        loading="lazy"
+      />
+    ))}
+  </div>
+
+  <ol class="mt-4 grid grid-cols-4 text-center lg:hidden">
+    {phases.map((phase, index) => (
+      <li class="group/label" data-step-item data-step-index={index} data-state="done">
+        <span class="type-step-title block text-muted-foreground transition-colors group-data-[state=current]/label:text-foreground">
+          {phase.name}
+        </span>
+        <span class="type-caption block text-subtle-foreground transition-colors group-data-[state=current]/label:text-primary">
+          {phase.mode}
+        </span>
+      </li>
+    ))}
+  </ol>
+</figure>

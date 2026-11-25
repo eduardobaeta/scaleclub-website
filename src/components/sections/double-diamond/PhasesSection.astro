@@ -1,0 +1,67 @@
+---
+import { Diamond } from '@lucide/astro';
+import Pill from '@/components/ui/Pill.astro';
+import { phasesContent } from '@/config/content/double-diamond';
+import DiamondDiagram from './DiamondDiagram.astro';
+
+const { id, eyebrow, title, lead, phases } = phasesContent;
+
+// Large screens alternate the cards above and below the diagram, each over the column of its half.
+const placements = [
+  'lg:col-start-1 lg:row-start-1 lg:self-end lg:-mb-16',
+  'lg:col-start-2 lg:row-start-3 lg:self-start lg:-mt-16',
+  'lg:col-start-3 lg:row-start-1 lg:self-end lg:-mb-16',
+  'lg:col-start-4 lg:row-start-3 lg:self-start lg:-mt-16',
+];
+---
+
+<section id={id} class="relative">
+  <div class="container-site pt-20 md:pt-30 lg:pt-35">
+    <Pill data-reveal="fade">
+      <Diamond slot="icon" class="size-4 text-primary" aria-hidden="true" />
+      {eyebrow}
+    </Pill>
+    <h2 class="type-section mt-6 text-foreground" data-reveal>
+      {title}
+    </h2>
+    <p class="type-lead mt-4 max-w-copy text-soft-foreground" data-reveal>
+      {lead}
+    </p>
+  </div>
+
+  <div class="relative" data-scroll-steps>
+    <div class="sticky top-0 flex h-svh items-center overflow-hidden">
+      <div class="container-site w-full pt-(--header-height)">
+        <div class="grid gap-y-4 lg:mx-auto lg:max-w-[calc((100svh-21rem)*1.68)] lg:grid-cols-4 lg:grid-rows-[minmax(6rem,auto)_auto_minmax(6rem,auto)] lg:gap-x-4">
+          <div class="lg:col-span-4 lg:row-start-2">
+            <DiamondDiagram />
+          </div>
+          {phases.map((phase, index) => (
+            <article
+              class:list={[
+                'relative z-10 flex in-[.js]:col-start-1 in-[.js]:row-start-2 flex-col rounded-2xl bg-card/95 p-5 backdrop-blur-md transition duration-500 lg:w-60 lg:justify-self-center ease-(--easing-standard) data-[state=current]:bg-accent data-[state=current]:shadow-glow-sm data-[state=hidden]:translate-y-4 data-[state=hidden]:opacity-0 max-lg:in-[.js]:data-[state=done]:opacity-0 lg:p-4',
+                placements[index],
+              ]}
+              data-step-item
+              data-step-index={index}
+              data-state="done"
+            >
+              <p class="flex items-baseline gap-2">
+                <span class="type-badge text-primary">{String(index + 1).padStart(2, '0')}</span>
+                <span class="type-step-title text-foreground">{phase.name}</span>
+              </p>
+              <p class="type-small mt-2 text-soft-foreground lg:type-step-copy">{phase.description}</p>
+              <p class="type-caption mt-3 font-medium text-primary lg:text-xs">{phase.method}</p>
+              <p class="type-caption mt-0.5 text-muted-foreground lg:hidden">{phase.tools}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </div>
+    {phases.map(() => (
+      <div class="h-80 md:h-100" data-step-trigger aria-hidden="true" />
+    ))}
+    <div class="h-40 md:h-60" data-step-trigger aria-hidden="true"></div>
+  </div>
+  <div class="h-24 md:h-40" aria-hidden="true"></div>
+</section>
