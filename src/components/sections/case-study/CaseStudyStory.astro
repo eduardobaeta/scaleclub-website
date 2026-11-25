@@ -1,0 +1,53 @@
+---
+import { render } from 'astro:content';
+import Section from '@/components/layout/Section.astro';
+import { caseStudyPage } from '@/config/content/case-studies';
+import type { CaseStudy } from '@/lib/case-studies';
+
+interface Props {
+  caseStudy: CaseStudy;
+}
+
+const { caseStudy } = Astro.props;
+const { description, areas } = caseStudy.data;
+const { Content } = await render(caseStudy);
+const { summaryLabel, areasLabel } = caseStudyPage;
+
+const row = 'grid gap-6 lg:grid-cols-[18rem_1fr] lg:gap-x-20';
+// The Markdown body is flat (h2, p, ol); on large screens each h2 takes the left column and its text the right one.
+// Margins use selectors that never compete, because Tailwind orders arbitrary variants after responsive ones.
+const story = [
+  'grid lg:grid-cols-[18rem_1fr] lg:gap-x-20',
+  '[&>h2]:type-title [&>h2]:text-balance [&>h2]:text-foreground lg:[&>h2]:col-start-1',
+  '[&>h2:not(:first-child)]:mt-20',
+  '[&>p]:type-body [&>p]:max-w-copy [&>p]:text-soft-foreground lg:[&>p]:col-start-2',
+  '[&>:not(h2)+:not(h2)]:mt-5 [&>h2+*]:mt-6',
+  'lg:[&>h2:first-child+*]:mt-0 lg:[&>h2:not(:first-child)+*]:mt-20',
+  '[&>ol]:flex [&>ol]:flex-wrap [&>ol]:gap-x-8 [&>ol]:gap-y-3 lg:[&>ol]:col-start-2',
+  "[&>ol>li]:type-small [&>ol>li]:relative [&>ol>li]:rounded-full [&>ol>li]:bg-muted [&>ol>li]:px-3.5 [&>ol>li]:py-2 [&>ol>li]:text-foreground [&>ol>li:not(:last-child)]:after:absolute [&>ol>li:not(:last-child)]:after:-right-6 [&>ol>li:not(:last-child)]:after:text-primary [&>ol>li:not(:last-child)]:after:content-['→']",
+];
+---
+
+<Section>
+  <div class={row}>
+    <p class="type-eyebrow text-primary">{summaryLabel}</p>
+    <p class="type-heading-md max-w-[48rem] text-foreground" data-reveal>
+      {description}
+    </p>
+  </div>
+
+  <div class:list={['mt-20 md:mt-28', story]}>
+    <Content />
+  </div>
+
+  {areas && (
+    <div class:list={[row, 'mt-16 md:mt-24']} data-reveal>
+      <h2 class="type-title text-foreground">{areasLabel}</h2>
+      <ul class="flex flex-wrap gap-2">
+        {areas.map((area) => (
+          <li class="type-small rounded-full bg-muted px-3.5 py-2 text-foreground">{area}</li>
+        ))}
+      </ul>
+    </div>
+  )}
+</Section>

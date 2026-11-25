@@ -1,0 +1,23 @@
+---
+import Section from '@/components/layout/Section.astro';
+import Button from '@/components/ui/Button.astro';
+import { caseStudyPage } from '@/config/content/case-studies';
+
+const { title, description, action } = caseStudyPage.closing;
+---
+
+<Section>
+  <div class="relative isolate overflow-hidden rounded-3xl bg-card p-8 text-center md:p-16" data-reveal>
+    <div
+      class="absolute -bottom-1/2 left-1/2 -z-10 aspect-square w-[70%] -translate-x-1/2 rounded-full bg-primary/25 blur-3xl"
+      aria-hidden="true"
+    ></div>
+    <h2 class="type-heading-lg mx-auto max-w-lead text-balance text-foreground">{title}</h2>
+    <p class="type-lead mx-auto mt-4 max-w-[34rem] text-soft-foreground">{description}</p>
+    <div class="mt-8">
+      <Button href={action.href} external={action.external}>
+        {action.label}
+      </Button>
+    </div>
+  </div>
+</Section>

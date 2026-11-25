@@ -1,0 +1,34 @@
+---
+import { companies } from '@/config/content/companies';
+import type { CaseStudy } from '@/lib/case-studies';
+
+interface Props {
+  caseStudy: CaseStudy;
+  as?: 'article' | 'div';
+  logoClass?: string;
+  class?: string;
+  'data-reveal'?: string;
+}
+
+const { caseStudy, as: Element = 'div', logoClass, class: className, ...attributes } = Astro.props;
+const { name, logo: Logo, surface } = companies[caseStudy.data.company];
+---
+
+<Element
+  class:list={['relative isolate flex flex-col overflow-hidden p-6 text-white md:p-12', surface, className]}
+  {...attributes}
+>
+  <div
+    class="absolute -top-1/3 -right-1/4 -z-10 aspect-square w-[80%] rounded-full bg-white/15 blur-3xl"
+    aria-hidden="true"
+  ></div>
+  <div
+    class="absolute inset-x-0 bottom-0 -z-10 h-2/3 bg-linear-to-t from-black/30 to-transparent"
+    aria-hidden="true"
+  ></div>
+  <div class="flex items-center justify-between gap-4">
+    <Logo class:list={['w-auto', logoClass]} role="img" aria-label={name} />
+    <p class="type-caption rounded-full bg-black px-3 py-1 font-medium tabular-nums">{caseStudy.data.year}</p>
+  </div>
+  <slot />
+</Element>
