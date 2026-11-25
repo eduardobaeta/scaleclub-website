@@ -1,0 +1,22 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import FieldError from './FieldError.astro';
+
+type Props = Omit<HTMLAttributes<'textarea'>, 'id' | 'name' | 'class'> & {
+  id: string;
+  label: string;
+  name: string;
+  error?: string;
+  class?: string;
+};
+
+const { id, label, name, error, class: className, ...textareaAttributes } = Astro.props;
+---
+
+<div class:list={['flex flex-col gap-2', className]}>
+  <label for={id} class="type-label text-muted-foreground">
+    {label}
+  </label>
+  <textarea id={id} name={name} class="form-control h-23 resize-none py-3" {...textareaAttributes}></textarea>
+  <FieldError id={id} message={error} />
+</div>

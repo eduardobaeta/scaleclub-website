@@ -1,0 +1,32 @@
+---
+import FieldError from './FieldError.astro';
+
+interface Option {
+  value: string;
+  label: string;
+}
+
+interface Props {
+  id: string;
+  name: string;
+  legend: string;
+  options: readonly Option[];
+  error?: string;
+  class?: string;
+}
+
+const { id, name, legend, options, error, class: className } = Astro.props;
+---
+
+<fieldset id={id} class:list={['flex flex-col gap-2', className]}>
+  <legend class="type-label mb-2 text-muted-foreground">{legend}</legend>
+  <div class="grid grid-cols-2 gap-2">
+    {options.map((option) => (
+      <label class="type-small flex h-11 items-center gap-2.5 rounded-xl border border-transparent bg-field px-3.5 text-foreground has-checked:border-primary">
+        <input type="radio" name={name} value={option.value} class="size-4 accent-primary" />
+        {option.label}
+      </label>
+    ))}
+  </div>
+  <FieldError id={id} message={error} />
+</fieldset>

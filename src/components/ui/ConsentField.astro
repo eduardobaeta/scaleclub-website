@@ -1,0 +1,20 @@
+---
+import FieldError from './FieldError.astro';
+
+interface Props {
+  id: string;
+  name: string;
+  label: string;
+  error?: string;
+}
+
+const { id, name, label, error } = Astro.props;
+---
+
+<div class="flex flex-col gap-2">
+  <label for={id} class="type-label flex items-start gap-2.5 font-normal tracking-normal text-muted-foreground">
+    <input id={id} name={name} type="checkbox" required class="mt-px size-4 shrink-0 accent-primary" />
+    <span class="leading-[1.45]">{label}</span>
+  </label>
+  <FieldError id={id} message={error} />
+</div>
