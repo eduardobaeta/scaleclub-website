@@ -1,0 +1,101 @@
+/* Brand roles without a shadcn equivalent are named by purpose and listed last. */
+:root {
+  --background: #060606;
+  --foreground: #ffffff;
+  --card: #161616;
+  --card-foreground: #ffffff;
+  --popover: #0c0c0c;
+  --popover-foreground: #ffffff;
+  --primary: #fe6b07;
+  --primary-foreground: #060606;
+  --secondary: #0c0c0c;
+  --secondary-foreground: #ffffff;
+  --muted: #0c0c0c;
+  --muted-foreground: #adadad;
+  --accent: #222222;
+  --accent-foreground: #ffffff;
+  --destructive: #ff5a4f;
+  --border: rgb(255 255 255 / 0.1);
+  --input: rgb(255 255 255 / 0.06);
+  --ring: #fe6b07;
+  --radius: 0.75rem;
+
+  --field: #0e0e0e;
+  --panel: rgb(18 18 18 / 0.9);
+  --soft-foreground: #e1e1e1;
+  --subtle-foreground: #8c8c8c;
+  --highlight-deep: #a04004;
+  --step-1: #ffc496;
+  --step-2: #ffb278;
+  --step-3: #ffa05c;
+  --step-4: #ff8e40;
+  --step-5: #ff7c24;
+  --step-6: #fe6b07;
+  --fatorcard: #0907c6;
+  --prospera: #0050e5;
+
+  --easing-standard: cubic-bezier(0.22, 1, 0.36, 1);
+  --header-height: 4rem;
+}
+
+@media (width >= 810px) {
+  :root {
+    --header-height: 5rem;
+  }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-field: var(--field);
+  --color-panel: var(--panel);
+  --color-soft-foreground: var(--soft-foreground);
+  --color-subtle-foreground: var(--subtle-foreground);
+  --color-highlight-deep: var(--highlight-deep);
+  --color-step-1: var(--step-1);
+  --color-step-2: var(--step-2);
+  --color-step-3: var(--step-3);
+  --color-step-4: var(--step-4);
+  --color-step-5: var(--step-5);
+  --color-step-6: var(--step-6);
+  --color-fatorcard: var(--fatorcard);
+  --color-prospera: var(--prospera);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-panel: calc(var(--radius) + 0.5rem);
+
+  --shadow-glow: 0 40px 100px color-mix(in oklab, var(--primary) 12%, transparent);
+  --shadow-glow-sm: 0 24px 60px color-mix(in oklab, var(--primary) 14%, transparent);
+  --container-copy: 42.5rem;
+  --container-lead: 40rem;
+
+  --font-sans: var(--font-brand);
+  --ease-standard: var(--easing-standard);
+}
+
+/* Breakpoints feed media queries, so they cannot reference runtime variables. */
+@theme {
+  --breakpoint-*: initial;
+  --breakpoint-md: 810px;
+  --breakpoint-lg: 1200px;
+  --breakpoint-xl: 1440px;
+}

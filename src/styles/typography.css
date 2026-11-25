@@ -1,0 +1,517 @@
+/* Type roles measured from the reference site: phone first, then md (810px) and lg (1200px). */
+
+@utility type-mega {
+  font-size: 4.5rem;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  font-weight: 500;
+  @variant md {
+    font-size: 8.75rem;
+    line-height: 1;
+    letter-spacing: 0.02em;
+  }
+  @variant lg {
+    font-size: 13.75rem;
+    line-height: 1;
+    letter-spacing: 0.02em;
+  }
+}
+
+@utility type-pps {
+  font-size: 6rem;
+  line-height: 1;
+  letter-spacing: normal;
+  font-weight: 600;
+  @variant md {
+    font-size: 8rem;
+    line-height: 1;
+    letter-spacing: normal;
+  }
+  @variant lg {
+    font-size: 10rem;
+    line-height: 1;
+    letter-spacing: normal;
+  }
+}
+
+@utility type-date {
+  font-size: 4rem;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  font-weight: 700;
+  @variant md {
+    font-size: 7rem;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+  }
+  @variant lg {
+    font-size: 10rem;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+  }
+}
+
+@utility type-price {
+  font-size: 3.75rem;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  font-weight: 600;
+  @variant md {
+    font-size: 7rem;
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+  }
+  @variant lg {
+    font-size: 8rem;
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+  }
+}
+
+@utility type-display-xl {
+  font-size: 3.25rem;
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+  font-weight: 500;
+  @variant md {
+    font-size: 5rem;
+    line-height: 0.98;
+    letter-spacing: -0.045em;
+  }
+  @variant lg {
+    font-size: 6.5rem;
+    line-height: 0.98;
+    letter-spacing: -0.045em;
+  }
+}
+
+@utility type-manifesto {
+  font-size: 2.5rem;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-weight: 500;
+  @variant md {
+    font-size: 4.25rem;
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+  @variant lg {
+    font-size: 6.5rem;
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+}
+
+@utility type-display {
+  font-size: 2.75rem;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  font-weight: 500;
+  @variant md {
+    font-size: 4.25rem;
+    line-height: 1;
+    letter-spacing: -0.035em;
+  }
+  @variant lg {
+    font-size: 5.5rem;
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+}
+
+@utility type-statement {
+  font-size: 2.25rem;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  font-weight: 500;
+  @variant md {
+    font-size: 3.75rem;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+  }
+  @variant lg {
+    font-size: 5.5rem;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+  }
+}
+
+@utility type-area {
+  font-size: 2.5rem;
+  line-height: 96px;
+  letter-spacing: -0.03em;
+  font-weight: 500;
+  @variant md {
+    font-size: 3.25rem;
+    line-height: 96px;
+    letter-spacing: -0.03em;
+  }
+  @variant lg {
+    font-size: 4.5rem;
+    line-height: 96px;
+    letter-spacing: -0.03em;
+  }
+}
+
+@utility type-hero {
+  font-size: 2.125rem;
+  line-height: 1.1;
+  letter-spacing: normal;
+  font-weight: 500;
+  @variant md {
+    font-size: 3rem;
+    line-height: 1;
+    letter-spacing: normal;
+  }
+  @variant lg {
+    font-size: 3.75rem;
+    line-height: 1;
+    letter-spacing: normal;
+  }
+}
+
+@utility type-heading-xl {
+  font-size: 1.625rem;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  font-weight: 500;
+  @variant md {
+    font-size: 2.5rem;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+  }
+  @variant lg {
+    font-size: 3.5rem;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+  }
+}
+
+@utility type-heading-lg {
+  font-size: 1.75rem;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+  @variant md {
+    font-size: 2.5rem;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+  @variant lg {
+    font-size: 3rem;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+}
+
+@utility type-section {
+  font-size: 2.75rem;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  font-weight: 500;
+  @variant md {
+    font-size: 3.5rem;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+  }
+  @variant lg {
+    font-size: 2.125rem;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+  }
+}
+
+@utility type-stat {
+  font-size: 1.625rem;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  font-weight: 500;
+  @variant md {
+    font-size: 2.75rem;
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+}
+
+@utility type-year {
+  font-size: 2.75rem;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  font-weight: 500;
+  @variant md {
+    font-size: 3.5rem;
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+}
+
+@utility type-date-sub {
+  font-size: 1.625rem;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+  @variant md {
+    font-size: 2.5rem;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+}
+
+@utility type-case-title {
+  font-size: 1.875rem;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  font-weight: 500;
+  @variant md {
+    font-size: 2.75rem;
+    line-height: 1.04;
+    letter-spacing: -0.035em;
+  }
+  @variant lg {
+    font-size: 3.25rem;
+    line-height: 1.02;
+    letter-spacing: -0.04em;
+  }
+}
+
+@utility type-name {
+  font-size: 1.75rem;
+  line-height: 1.2;
+  letter-spacing: normal;
+  font-weight: 500;
+  @variant md {
+    font-size: 2rem;
+    line-height: 1.2;
+    letter-spacing: normal;
+  }
+}
+
+@utility type-heading-md {
+  font-size: 1.375rem;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+  @variant md {
+    font-size: 1.875rem;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+}
+
+@utility type-heading-sm {
+  font-size: 1.375rem;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+  @variant md {
+    font-size: 1.75rem;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+}
+
+@utility type-card-title {
+  font-size: 1.5rem;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+}
+
+@utility type-quote {
+  font-size: 1.25rem;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  font-weight: 500;
+  @variant md {
+    font-size: 1.375rem;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+  }
+}
+
+@utility type-title {
+  font-size: 1.25rem;
+  line-height: 1.3;
+  letter-spacing: normal;
+  font-weight: 500;
+}
+
+@utility type-lead-xl {
+  font-size: 1.25rem;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  font-weight: 400;
+  @variant md {
+    font-size: 1.5rem;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+  }
+  @variant lg {
+    font-size: 2rem;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+  }
+}
+
+@utility type-lead {
+  font-size: 1.25rem;
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+  font-weight: 400;
+  @variant md {
+    font-size: 1.375rem;
+    line-height: 1.45;
+    letter-spacing: -0.01em;
+  }
+  @variant lg {
+    font-size: 1.125rem;
+    line-height: 1.45;
+    letter-spacing: -0.01em;
+  }
+}
+
+@utility type-intro {
+  font-size: 1.0625rem;
+  line-height: 1.4;
+  letter-spacing: normal;
+  font-weight: 400;
+  @variant lg {
+    font-size: 1.125rem;
+    line-height: 1.4;
+    letter-spacing: normal;
+  }
+}
+
+@utility type-body-lg {
+  font-size: 1.125rem;
+  line-height: 1.5;
+  letter-spacing: normal;
+  font-weight: 400;
+}
+
+@utility type-body {
+  font-size: 1rem;
+  line-height: 1.5;
+  letter-spacing: normal;
+  font-weight: 400;
+}
+
+@utility type-body-sm {
+  font-size: 0.9375rem;
+  line-height: 1.4;
+  letter-spacing: normal;
+  font-weight: 400;
+}
+
+@utility type-small {
+  font-size: 0.875rem;
+  line-height: 1.4;
+  letter-spacing: normal;
+  font-weight: 400;
+}
+
+@utility type-caption {
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  letter-spacing: normal;
+  font-weight: 400;
+}
+
+@utility type-eyebrow {
+  font-size: 0.9375rem;
+  line-height: 1.35;
+  letter-spacing: normal;
+  font-weight: 500;
+}
+
+@utility type-button {
+  font-size: 0.875rem;
+  line-height: 1.2;
+  letter-spacing: normal;
+  font-weight: 500;
+}
+
+@utility type-button-lg {
+  font-size: 0.9375rem;
+  line-height: 1.2;
+  letter-spacing: normal;
+  font-weight: 500;
+}
+
+@utility type-nav {
+  font-size: 0.8125rem;
+  line-height: 1.2;
+  letter-spacing: normal;
+  font-weight: 400;
+}
+
+@utility type-label {
+  font-size: 0.75rem;
+  line-height: 1.2;
+  letter-spacing: 0.04em;
+  font-weight: 500;
+}
+
+@utility type-overline {
+  font-size: 0.75rem;
+  line-height: 1.2;
+  letter-spacing: 0.12em;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+@utility type-index {
+  font-size: 1rem;
+  line-height: 1.2;
+  letter-spacing: 0.04em;
+  font-weight: 500;
+}
+
+@utility type-tagline {
+  font-size: 1.25rem;
+  line-height: 1;
+  letter-spacing: normal;
+  font-weight: 500;
+  @variant md {
+    font-size: 2.25rem;
+    line-height: 1;
+    letter-spacing: normal;
+  }
+}
+
+@utility type-subtitle {
+  font-size: 0.9375rem;
+  line-height: 1.4;
+  letter-spacing: normal;
+  font-weight: 400;
+  @variant md {
+    font-size: 1.25rem;
+  }
+}
+
+@utility type-step-title {
+  font-size: 1rem;
+  line-height: 1.2;
+  letter-spacing: normal;
+  font-weight: 500;
+  @variant md {
+    font-size: 1.125rem;
+  }
+}
+
+@utility type-step-copy {
+  font-size: 0.75rem;
+  line-height: 1.35;
+  letter-spacing: normal;
+  font-weight: 400;
+  @variant md {
+    font-size: 0.8125rem;
+  }
+}
+
+@utility type-badge {
+  font-size: 0.75rem;
+  line-height: 1.2;
+  letter-spacing: normal;
+  font-weight: 500;
+}
