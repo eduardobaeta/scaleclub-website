@@ -1,0 +1,12 @@
+dist/
+.astro/
+.vercel/
+coverage/
+test-results/
+playwright-report/
+public/
+bun.lock
+# Standard documents are copied verbatim from the company standard.
+AGENTS.md
+CLAUDE.md
+docs/*.md
