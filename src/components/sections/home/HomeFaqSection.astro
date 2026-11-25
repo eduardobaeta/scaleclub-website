@@ -1,0 +1,30 @@
+---
+import FaqList from '@/components/ui/FaqList.astro';
+import { homeFaqContent } from '@/config/content/home';
+
+const { title, contact, items } = homeFaqContent;
+---
+
+<section class="relative">
+  <div class="container-site pt-20 pb-24 md:pt-35 md:pb-40">
+    <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+      <h2 class="type-heading-lg max-w-[38.75rem] text-foreground" data-reveal>
+        {title}
+      </h2>
+      <p class="type-body-sm text-muted-foreground md:type-body-lg">
+        {contact.prefix}{' '}
+        <a
+          href={contact.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-foreground underline underline-offset-4"
+        >
+          {contact.label}
+        </a>
+      </p>
+    </div>
+    <div class="mt-10 md:mt-16">
+      <FaqList items={items} />
+    </div>
+  </div>
+</section>

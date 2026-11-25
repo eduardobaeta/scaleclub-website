@@ -1,0 +1,52 @@
+---
+import { areasContent } from '@/config/content/home';
+
+const { id, title, description, areas } = areasContent;
+---
+
+<section id={id} class="group/areas relative" data-scroll-steps="areas" data-phase="intro">
+  <div class="in-[.js]:sticky in-[.js]:top-0 in-[.js]:h-svh in-[.js]:overflow-hidden">
+    <div class="container-site relative flex py-16 in-[.js]:absolute in-[.js]:inset-0 in-[.js]:py-0 flex-col items-center justify-center text-center transition duration-500 group-data-[phase=list]/areas:-translate-y-6 group-data-[phase=list]/areas:opacity-0">
+      <h2 class="type-heading-lg max-w-[51.25rem] text-foreground">{title}</h2>
+      <p class="type-subtitle mt-4 max-w-lead text-muted-foreground lg:type-body-lg">{description}</p>
+    </div>
+
+    <div class="container-site relative flex h-full flex-col justify-center gap-10 in-[.js]:opacity-0 transition-opacity duration-500 group-data-[phase=list]/areas:opacity-100 md:grid md:grid-cols-2 md:items-center md:gap-0">
+      <div class="relative h-72 overflow-hidden mask-y-from-70% mask-y-to-100% md:h-[37.5rem]">
+        <ul
+          class="absolute inset-x-0 top-1/2 transition-transform duration-700 ease-(--easing-standard)"
+          data-areas-list
+        >
+          {areas.map((area) => (
+            <li
+              class="type-area origin-left text-foreground/35 transition duration-500 data-[active=true]:text-foreground md:data-[active=false]:scale-90"
+              data-active="true"
+              data-step-item
+            >
+              {area.name}
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div class="relative min-h-32 md:min-h-40">
+        {areas.map((area) => (
+          <p
+            class="type-lead-xl absolute inset-x-0 top-0 text-foreground opacity-0 transition duration-500 data-[active=true]:opacity-100 md:top-1/2 md:-translate-y-1/2"
+            data-active="false"
+            data-step-detail
+          >
+            {area.description}
+          </p>
+        ))}
+      </div>
+    </div>
+  </div>
+  <div class="h-56 md:h-90" aria-hidden="true"></div>
+  {areas.map(() => (
+    <>
+      <div class="h-45 md:h-67.5" data-step-trigger aria-hidden="true" />
+      <div class="h-56 md:h-90" aria-hidden="true" />
+    </>
+  ))}
+  <div class="h-67.5 md:h-112.5" aria-hidden="true"></div>
+</section>

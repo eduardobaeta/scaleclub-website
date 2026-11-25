@@ -1,0 +1,63 @@
+---
+import { Image } from 'astro:assets';
+import Section from '@/components/layout/Section.astro';
+import { mentorContent } from '@/config/content/home';
+import CaseStudies from './CaseStudies.astro';
+
+const { id, eyebrow, name, role, photo, paragraphs, companiesTitle, companies } = mentorContent;
+---
+
+<Section id={id}>
+  <article
+    class="relative isolate overflow-hidden rounded-2xl bg-black md:min-h-[38rem] lg:min-h-[44rem]"
+    data-reveal="fade"
+  >
+    <div class="relative md:absolute md:inset-0 md:-z-10">
+      <Image
+        src={photo.src}
+        alt={photo.alt}
+        widths={[480, 960, 1440, 1672]}
+        sizes="(min-width: 1440px) 1220px, calc(100vw - 50px)"
+        class="aspect-[4/3] w-full object-cover object-[22%_center] md:aspect-auto md:h-full"
+      />
+      <div
+        class="absolute inset-0 bg-linear-to-b from-transparent from-55% to-black md:bg-linear-to-r md:from-transparent md:from-25% md:via-black/80 md:via-55% md:to-black"
+        aria-hidden="true"
+      ></div>
+    </div>
+
+    <div class="relative px-6 pb-8 md:ml-auto md:flex md:min-h-[inherit] md:w-1/2 md:flex-col md:justify-center md:p-12 lg:w-[54%] lg:px-12">
+      <p class="type-eyebrow text-primary">{eyebrow}</p>
+      <h2 class="type-name mt-4 text-foreground">{name}</h2>
+      <p class="type-body-sm mt-3 text-subtle-foreground">{role}</p>
+      <div class="mt-8 space-y-5">
+        {paragraphs.map((paragraph) => (
+          <p class="type-body text-soft-foreground">{paragraph}</p>
+        ))}
+      </div>
+      <div class="mt-12">
+        <h3 class="type-caption text-subtle-foreground">{companiesTitle}</h3>
+        <ul class="mt-5 flex flex-wrap items-center gap-x-7 gap-y-5 lg:flex-nowrap lg:gap-x-[1.125rem] xl:gap-x-7">
+          {companies.map(({ name: companyName, logo: Logo, href, compact }) => (
+            <li>
+              <a
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="block text-foreground/60 transition-colors duration-300 hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
+              >
+                <Logo
+                  class:list={['w-auto', compact ? 'h-3 xl:h-3.5' : 'h-4 lg:h-3.5 xl:h-4.5']}
+                  role="img"
+                  aria-label={companyName}
+                />
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </article>
+
+  <CaseStudies />
+</Section>

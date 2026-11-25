@@ -1,0 +1,90 @@
+---
+import { getImage } from 'astro:assets';
+import FormPanel from '@/components/ui/FormPanel.astro';
+import { tableContent } from '@/config/content/home';
+import { MeetingRequestForm } from '@/features/leads';
+
+const { id, title, frames, statements, edition, form } = tableContent;
+
+const frameImages = await Promise.all(
+  frames.map((frame) => getImage({ src: frame, width: 1280, format: 'webp', quality: 70 })),
+);
+const [firstFrame] = frameImages;
+
+// Without JavaScript the phases stack in normal flow; the script shows them one at a time over the pinned frames.
+const phaseClasses =
+  'relative in-[.js]:absolute in-[.js]:inset-x-0 in-[.js]:top-1/2 in-[.js]:-translate-y-1/2 in-[.js]:opacity-0 in-[.js]:blur-sm transition duration-700 data-[active=true]:opacity-100 data-[active=true]:blur-none';
+---
+
+<section id={id} class="relative" data-table-sequence>
+  <div class="relative overflow-hidden bg-background py-24 in-[.js]:sticky in-[.js]:top-0 in-[.js]:h-svh in-[.js]:py-0">
+    {firstFrame && (
+      <img
+        src={firstFrame.src}
+        alt=""
+        class="absolute inset-0 size-full object-cover"
+        loading="lazy"
+        decoding="async"
+        width={firstFrame.attributes.width}
+        height={firstFrame.attributes.height}
+      />
+    )}
+    <canvas
+      class="absolute inset-0 size-full"
+      aria-hidden="true"
+      data-table-canvas
+      data-frames={JSON.stringify(frameImages.map((image) => image.src))}
+    ></canvas>
+    <div class="absolute inset-0 bg-background/45" aria-hidden="true"></div>
+
+    <h2 class:list={['type-mega text-center text-foreground', phaseClasses]} data-table-phase data-active="true">
+      {title}
+    </h2>
+    {statements.map((statement) => (
+      <p
+        class:list={[
+          'type-statement mx-auto mt-10 max-w-[62.5rem] px-6 text-center text-foreground in-[.js]:mt-0',
+          phaseClasses,
+        ]}
+        data-table-phase
+      >
+        {statement}
+      </p>
+    ))}
+  </div>
+
+  <div
+    class="hidden in-[.js]:block in-[.js]:h-[1800px] md:in-[.js]:h-[2200px]"
+    aria-hidden="true"
+    data-table-track
+  ></div>
+
+  <div class="relative z-10 flex min-h-svh items-center bg-background/55 py-24 in-[.js]:-mt-[100svh] in-[.js]:bg-transparent md:py-28">
+    <div class="container-site grid w-full items-center gap-8 lg:grid-cols-[1fr_27.5rem] lg:px-20">
+      <div>
+        <p class="type-button inline-flex rounded-full bg-background/60 px-3 py-1.5 text-soft-foreground">
+          {edition.eyebrow}
+        </p>
+        <h3 class="type-display mt-6 max-w-[44rem] text-foreground">{edition.title}</h3>
+        <p class="type-body-sm mt-6 max-w-[32.5rem] text-soft-foreground lg:type-body-lg">{edition.description}</p>
+        <ul class="mt-6 flex flex-wrap gap-2">
+          {edition.facts.map((fact) => (
+            <li class="type-small rounded-full bg-background/60 px-3 py-1.5 text-foreground backdrop-blur-sm">
+              {fact}
+            </li>
+          ))}
+        </ul>
+        <p class="mt-6 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+          <span class="type-heading-md text-primary">{edition.price.installments}</span>
+          <span class="type-body text-soft-foreground">{edition.price.cash}</span>
+        </p>
+        <a href={edition.link.href} class="type-button mt-6 inline-flex text-foreground underline underline-offset-4">
+          {edition.link.label}
+        </a>
+      </div>
+      <FormPanel title={form.title} description={form.description}>
+        <MeetingRequestForm />
+      </FormPanel>
+    </div>
+  </div>
+</section>

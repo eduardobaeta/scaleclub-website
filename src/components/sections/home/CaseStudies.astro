@@ -1,0 +1,57 @@
+---
+import { ArrowUpRight } from '@lucide/astro';
+import { companies } from '@/config/content/companies';
+import { casesContent } from '@/config/content/home';
+import { caseStudyPath } from '@/config/routes';
+import { getCaseStudies } from '@/lib/case-studies';
+import CaseSurface from '../case-study/CaseSurface.astro';
+
+const { id, title, description, action, scopeLabel } = casesContent;
+const cases = await getCaseStudies();
+---
+
+<div id={id} class="mt-24 md:mt-35">
+  <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-[46.25rem_1fr]">
+    <h2 class="type-heading-lg max-w-[41.25rem] text-foreground" data-reveal>
+      {title}
+    </h2>
+    <p class="type-body-sm max-w-[30rem] text-muted-foreground md:type-body-lg" data-reveal>
+      {description}
+    </p>
+  </div>
+  <ul class="mt-10 space-y-8 md:mt-18">
+    {cases.map((caseStudy) => (
+      <li class="sticky top-20 md:top-25">
+        <CaseSurface as="article" caseStudy={caseStudy} logoClass="h-4 md:h-5" class="rounded-2xl md:h-115 lg:h-130">
+          <div class="mt-14 grid gap-10 md:mt-auto md:grid-cols-[1fr_auto] md:items-end md:gap-16">
+            <div>
+              <h3 class="type-case-title max-w-[46rem]">{caseStudy.data.title}</h3>
+              <p class="type-body-sm mt-5 max-w-[34rem] text-white/80 lg:type-body-lg">{caseStudy.data.description}</p>
+              <ul class="mt-6 flex flex-wrap gap-2" aria-label={scopeLabel}>
+                {caseStudy.data.scope.map((item) => (
+                  <li class="type-caption rounded-full bg-white/10 px-3 py-1.5 text-white/90">{item}</li>
+                ))}
+              </ul>
+            </div>
+            <div class="flex flex-col md:items-end md:text-right">
+              <p class="flex flex-col md:items-end">
+                <span class="type-display font-semibold tracking-tight">{caseStudy.data.result.value}</span>
+                <span class="type-body-sm mt-2 max-w-[14rem] text-white/75">{caseStudy.data.result.label}</span>
+              </p>
+              <a
+                href={caseStudyPath(caseStudy.id)}
+                class="type-button mt-6 inline-flex h-11 items-center gap-3 self-start rounded-full bg-white pr-1.5 pl-5 text-black transition-transform duration-300 hover:-translate-y-0.5 md:self-end"
+              >
+                {action}
+                <span class="sr-only">: {companies[caseStudy.data.company].name}</span>
+                <span class="grid size-8 place-items-center rounded-full bg-black text-white">
+                  <ArrowUpRight class="size-4" aria-hidden="true" />
+                </span>
+              </a>
+            </div>
+          </div>
+        </CaseSurface>
+      </li>
+    ))}
+  </ul>
+</div>

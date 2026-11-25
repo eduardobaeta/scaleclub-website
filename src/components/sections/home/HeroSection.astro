@@ -1,0 +1,89 @@
+---
+import { getImage, Image } from 'astro:assets';
+import Button from '@/components/ui/Button.astro';
+import { heroContent, type BadgeTone } from '@/config/content/home';
+
+const { id, proof, title, lead, note, action, background, badges } = heroContent;
+
+const [desktop, phone] = await Promise.all([
+  getImage({ src: background.desktop, width: 1600, format: 'webp', quality: 70 }),
+  getImage({ src: background.phone, width: 720, format: 'webp', quality: 70 }),
+]);
+
+const toneClasses: Record<BadgeTone, string> = {
+  dark: 'bg-card text-soft-foreground',
+  primary: 'bg-primary text-primary-foreground',
+  deep: 'bg-highlight-deep text-foreground',
+  light: 'bg-step-2 text-primary-foreground',
+};
+---
+
+<section id={id} class="relative flex min-h-svh items-center overflow-hidden lg:h-[56.25rem] lg:min-h-0">
+  <picture>
+    <source media="(min-aspect-ratio: 1/1)" srcset={desktop.src} />
+    <img
+      src={phone.src}
+      alt=""
+      class="absolute inset-0 size-full object-cover"
+      fetchpriority="high"
+      decoding="async"
+      width={phone.attributes.width}
+      height={phone.attributes.height}
+    />
+  </picture>
+  <canvas
+    class="absolute inset-0 size-full opacity-0 transition-opacity duration-1000 data-[state=ready]:opacity-100"
+    data-hero-mesh
+    aria-hidden="true"
+  ></canvas>
+  <div class="absolute inset-0 bg-background/25" aria-hidden="true"></div>
+
+  <ul class="absolute inset-0 max-md:hidden" aria-hidden="true">
+    {badges.map((badge) => (
+      <li
+        class:list={[
+          'type-button absolute rounded-full px-3.5 py-1.5 whitespace-nowrap shadow-lg',
+          toneClasses[badge.tone],
+          badge.placement,
+        ]}
+        data-hero-badge
+      >
+        {badge.label}
+      </li>
+    ))}
+  </ul>
+
+  <div class="relative container-site flex flex-col items-center pt-32 pb-24 text-center md:pt-28">
+    <div class="flex items-center gap-6" data-reveal="fade">
+      <ul class="flex -space-x-2.5">
+        {proof.avatars.map((avatar) => (
+          <li>
+            <Image
+              src={avatar}
+              alt=""
+              width={64}
+              height={64}
+              class="size-8 rounded-full border-2 border-background object-cover"
+              loading="eager"
+            />
+          </li>
+        ))}
+      </ul>
+      <p class="type-button text-foreground">{proof.text}</p>
+    </div>
+    <h1 class="type-hero mt-7 max-w-[61rem] text-foreground lg:mt-12" data-reveal data-reveal-delay="0.1">
+      {title}
+    </h1>
+    <p class="type-intro mt-6 max-w-[49rem] text-foreground" data-reveal data-reveal-delay="0.2">
+      {lead}
+    </p>
+    <p class="type-small mt-8 max-w-[38rem] text-foreground lg:mt-10" data-reveal data-reveal-delay="0.3">
+      {note}
+    </p>
+    <div class="mt-8 lg:mt-10" data-reveal data-reveal-delay="0.4">
+      <Button href={action.href} external={action.external}>
+        {action.label}
+      </Button>
+    </div>
+  </div>
+</section>

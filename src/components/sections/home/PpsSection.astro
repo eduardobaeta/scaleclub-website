@@ -1,0 +1,25 @@
+---
+import { ppsContent } from '@/config/content/home';
+
+const { id, tagline, lines, letters } = ppsContent;
+---
+
+<section id={id} class="relative h-[calc(100svh+1800px)] md:h-[calc(100svh+2610px)]" data-pps aria-label={tagline}>
+  <div class="sticky top-0 flex h-svh items-center justify-center overflow-hidden">
+    <p class="type-tagline absolute text-foreground opacity-0" data-pps-tagline>
+      {tagline}
+    </p>
+    <p class="type-manifesto relative container-site text-center text-foreground" data-pps-statement>
+      {lines.map((line) => (
+        <span class="block" data-pps-line>
+          {line}
+        </span>
+      ))}
+    </p>
+    <p class="type-pps absolute flex text-primary opacity-0" aria-hidden="true" data-pps-letters>
+      {letters.map((letter) => (
+        <span data-pps-letter>{letter}</span>
+      ))}
+    </p>
+  </div>
+</section>

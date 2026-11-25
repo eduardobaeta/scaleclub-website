@@ -1,0 +1,33 @@
+---
+import { challengesContent } from '@/config/content/home';
+
+const { title, description, statement, cards } = challengesContent;
+---
+
+<section class="relative h-[calc(100svh+1215px)] md:h-[calc(100svh+1620px)]" data-horizontal-cards>
+  <div class="sticky top-0 flex h-svh flex-col overflow-hidden">
+    <div class="container-site flex flex-1 flex-col justify-center gap-8 lg:gap-0">
+      <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-[42.5rem_1fr]">
+        <h2 class="type-heading-lg text-foreground lg:max-w-[41.25rem]" data-reveal>
+          {title}
+        </h2>
+        <p class="type-body-sm text-muted-foreground md:type-body-lg lg:max-w-[30rem] lg:justify-self-end" data-reveal>
+          {description}
+        </p>
+      </div>
+      <p class="type-heading-xl text-foreground lg:mt-6 lg:max-w-[62.5rem]" data-reveal>
+        {statement}
+      </p>
+      <div class="lg:mt-10">
+        <ul class="flex w-max gap-6" data-horizontal-track>
+          {cards.map((card) => (
+            <li class="flex h-62 w-73 shrink-0 flex-col justify-between rounded-2xl bg-card p-6 md:h-72 md:w-110 lg:h-80 lg:w-130 lg:p-9">
+              <h3 class="type-heading-md text-foreground">{card.title}</h3>
+              <p class="type-body-sm text-muted-foreground lg:text-[1.0625rem] lg:leading-normal">{card.description}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
