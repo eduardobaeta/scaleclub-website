@@ -1,0 +1,29 @@
+---
+import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
+import CaseStudyClosing from '@/components/sections/case-study/CaseStudyClosing.astro';
+import CaseStudyHero from '@/components/sections/case-study/CaseStudyHero.astro';
+import CaseStudyStory from '@/components/sections/case-study/CaseStudyStory.astro';
+import { caseStudyPage } from '@/config/content/case-studies';
+import { homeNavigation } from '@/config/site';
+import SiteLayout from '@/layouts/SiteLayout.astro';
+import { getCaseStudies } from '@/lib/case-studies';
+
+export const getStaticPaths = (async () => {
+  const caseStudies = await getCaseStudies();
+  return caseStudies.map((caseStudy) => ({ params: { slug: caseStudy.id }, props: { caseStudy } }));
+}) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { caseStudy } = Astro.props;
+---
+
+<SiteLayout
+  title={`${caseStudy.data.title}${caseStudyPage.titleSuffix}`}
+  description={caseStudy.data.description}
+  navigation={homeNavigation}
+>
+  <CaseStudyHero caseStudy={caseStudy} />
+  <CaseStudyStory caseStudy={caseStudy} />
+  <CaseStudyClosing />
+</SiteLayout>

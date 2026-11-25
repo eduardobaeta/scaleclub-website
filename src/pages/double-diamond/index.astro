@@ -1,0 +1,21 @@
+---
+import DesignThinkingSection from '@/components/sections/double-diamond/DesignThinkingSection.astro';
+import EbookSection from '@/components/sections/double-diamond/EbookSection.astro';
+import LessonSection from '@/components/sections/double-diamond/LessonSection.astro';
+import PhasesSection from '@/components/sections/double-diamond/PhasesSection.astro';
+import TableInvitationSection from '@/components/sections/double-diamond/TableInvitationSection.astro';
+import { doubleDiamondNavigation, doubleDiamondPage } from '@/config/content/double-diamond';
+import SiteLayout from '@/layouts/SiteLayout.astro';
+---
+
+<SiteLayout
+  title={doubleDiamondPage.title}
+  description={doubleDiamondPage.description}
+  navigation={doubleDiamondNavigation}
+>
+  <LessonSection />
+  <PhasesSection />
+  <DesignThinkingSection />
+  <EbookSection />
+  <TableInvitationSection />
+</SiteLayout>

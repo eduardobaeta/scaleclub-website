@@ -1,0 +1,20 @@
+---
+import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
+import MessageSection from '@/components/sections/MessageSection.astro';
+import { messageNavigation, thankYouContent } from '@/config/content/messages';
+import SiteLayout from '@/layouts/SiteLayout.astro';
+
+export const getStaticPaths = (() =>
+  Object.entries(thankYouContent).map(([form, content]) => ({
+    params: { form },
+    props: { content },
+  }))) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { content } = Astro.props;
+---
+
+<SiteLayout title={content.title} description={content.lead} navigation={messageNavigation} noindex>
+  <MessageSection content={content} />
+</SiteLayout>

@@ -1,0 +1,9 @@
+---
+import MessageSection from '@/components/sections/MessageSection.astro';
+import { formErrorContent, messageNavigation } from '@/config/content/messages';
+import SiteLayout from '@/layouts/SiteLayout.astro';
+---
+
+<SiteLayout title={formErrorContent.title} description={formErrorContent.lead} navigation={messageNavigation} noindex>
+  <MessageSection content={formErrorContent} />
+</SiteLayout>

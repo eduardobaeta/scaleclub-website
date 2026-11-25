@@ -1,0 +1,28 @@
+---
+import AreasSection from '@/components/sections/home/AreasSection.astro';
+import ChallengesSection from '@/components/sections/home/ChallengesSection.astro';
+import HeroSection from '@/components/sections/home/HeroSection.astro';
+import HomeFaqSection from '@/components/sections/home/HomeFaqSection.astro';
+import MentorSection from '@/components/sections/home/MentorSection.astro';
+import MethodologySection from '@/components/sections/home/MethodologySection.astro';
+import PpsSection from '@/components/sections/home/PpsSection.astro';
+import TableSection from '@/components/sections/home/TableSection.astro';
+import { homePage } from '@/config/content/home';
+import SiteLayout from '@/layouts/SiteLayout.astro';
+---
+
+<SiteLayout
+  title={homePage.title}
+  description={homePage.description}
+  navigation={homePage.navigation}
+  hideHeaderOnScroll
+>
+  <HeroSection />
+  <PpsSection />
+  <ChallengesSection />
+  <MethodologySection />
+  <AreasSection />
+  <MentorSection />
+  <TableSection />
+  <HomeFaqSection />
+</SiteLayout>

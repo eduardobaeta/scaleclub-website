@@ -1,0 +1,69 @@
+---
+import { Lock, RotateCw, Target } from '@lucide/astro';
+import Section from '@/components/layout/Section.astro';
+import ApplicationSection from '@/components/sections/table-page/ApplicationSection.astro';
+import AudienceSection from '@/components/sections/table-page/AudienceSection.astro';
+import CalloutSection from '@/components/sections/table-page/CalloutSection.astro';
+import OutcomeSection from '@/components/sections/table-page/OutcomeSection.astro';
+import PricingSection from '@/components/sections/table-page/PricingSection.astro';
+import TableHeroSection from '@/components/sections/table-page/TableHeroSection.astro';
+import FaqList from '@/components/ui/FaqList.astro';
+import NumberedCards from '@/components/ui/NumberedCards.astro';
+import SectionIntro from '@/components/ui/SectionIntro.astro';
+import {
+  focusedCycle,
+  howItWorks,
+  recurringProblem,
+  tableFaq,
+  tableNavigation,
+  tablePage,
+} from '@/config/content/table-page';
+import SiteLayout from '@/layouts/SiteLayout.astro';
+---
+
+<SiteLayout title={tablePage.title} description={tablePage.description} navigation={tableNavigation}>
+  <TableHeroSection />
+
+  <Section>
+    <SectionIntro eyebrow={recurringProblem.eyebrow} title={recurringProblem.title} lead={recurringProblem.lead}>
+      <RotateCw slot="icon" class="size-4 text-primary" aria-hidden="true" />
+    </SectionIntro>
+    <div class="mt-10">
+      <NumberedCards items={recurringProblem.items} columns={3} />
+    </div>
+  </Section>
+
+  <Section>
+    <SectionIntro eyebrow={focusedCycle.eyebrow} title={focusedCycle.title} lead={focusedCycle.lead}>
+      <Target slot="icon" class="size-4 text-primary" aria-hidden="true" />
+    </SectionIntro>
+    <div class="mt-10">
+      <NumberedCards items={focusedCycle.items} />
+    </div>
+  </Section>
+
+  <OutcomeSection />
+
+  <Section id={howItWorks.id}>
+    <SectionIntro eyebrow={howItWorks.eyebrow} title={howItWorks.title} lead={howItWorks.lead}>
+      <Lock slot="icon" class="size-4 text-primary" aria-hidden="true" />
+    </SectionIntro>
+    <div class="mt-10">
+      <NumberedCards items={howItWorks.items} />
+    </div>
+  </Section>
+
+  <AudienceSection />
+  <CalloutSection />
+  <PricingSection />
+  <ApplicationSection />
+
+  <Section id={tableFaq.id}>
+    <h2 class="type-section text-foreground" data-reveal>
+      {tableFaq.title}
+    </h2>
+    <div class="mt-10 md:mt-14">
+      <FaqList items={tableFaq.items} />
+    </div>
+  </Section>
+</SiteLayout>

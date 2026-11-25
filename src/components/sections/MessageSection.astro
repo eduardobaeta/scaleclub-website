@@ -1,0 +1,33 @@
+---
+import Button from '@/components/ui/Button.astro';
+import type { MessagePageContent } from '@/config/content/messages';
+
+interface Props {
+  content: MessagePageContent;
+}
+
+const { eyebrow, heading, lead, actions } = Astro.props.content;
+---
+
+<section class="container-site flex min-h-svh flex-col justify-end pt-40 pb-20">
+  <p class="type-eyebrow text-soft-foreground">{eyebrow}</p>
+  <h1 class="type-display mt-6 text-foreground">{heading}</h1>
+  <p class="type-lead mt-6 max-w-lead text-muted-foreground">{lead}</p>
+  <div class="mt-8 flex flex-wrap items-center gap-4">
+    {actions.map((action, index) =>
+      index === 0 ? (
+        <Button href={action.href} external={action.external}>
+          {action.label}
+        </Button>
+      ) : (
+        <a
+          href={action.href}
+          class="type-button text-foreground underline-offset-4 hover:underline"
+          {...(action.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+        >
+          {action.label}
+        </a>
+      ),
+    )}
+  </div>
+</section>
