@@ -1,0 +1,56 @@
+---
+import { BadgeCheck } from '@lucide/astro';
+import Section from '@/components/layout/Section.astro';
+import Button from '@/components/ui/Button.astro';
+import CheckList from '@/components/ui/CheckList.astro';
+import { pricing } from '@/config/content/table-page';
+
+const { id, title, intro, guarantee, installments, cashPrice, includes, seats } = pricing;
+const seatDots = Array.from({ length: seats.count });
+---
+
+<Section id={id}>
+  <h2 class="type-section text-foreground" data-reveal>
+    {title}
+  </h2>
+  <p class="type-lead mt-4 text-soft-foreground" data-reveal>
+    {intro}
+  </p>
+  <div class="mt-10 grid gap-2 lg:grid-cols-[1fr_23.75rem]">
+    <div class="relative overflow-hidden rounded-2xl bg-card p-7 md:p-12" data-reveal>
+      <div
+        class="pointer-events-none absolute -top-40 -right-40 size-72 rounded-full bg-primary/25 blur-3xl md:-top-24 md:right-0 md:size-96"
+        aria-hidden="true"
+      ></div>
+      <p class="type-caption relative inline-flex items-center gap-2 rounded-full bg-highlight-deep/40 px-3 py-1.5 font-medium text-soft-foreground">
+        <BadgeCheck class="size-3.5 shrink-0 text-primary" aria-hidden="true" />
+        {guarantee}
+      </p>
+      <p class="relative mt-8 flex items-start gap-3 text-foreground">
+        <span class="type-heading-md mt-2 text-primary md:mt-4">{installments.count}</span>
+        <span class="type-price">{installments.value}</span>
+      </p>
+      <p class="type-body-lg relative mt-4 text-soft-foreground">{cashPrice}</p>
+      <CheckList
+        items={includes}
+        variant="plain"
+        class="relative mt-8 grid gap-x-8 gap-y-3 border-t border-border pt-8 md:grid-cols-2"
+      />
+    </div>
+    <div class="flex flex-col rounded-2xl bg-muted p-7" data-reveal>
+      <h3 class="type-title text-foreground">{seats.title}</h3>
+      <p class="mt-6 flex items-center gap-3">
+        <span class="flex gap-2" aria-hidden="true">
+          {seatDots.map(() => (
+            <span class="size-7 rounded-full bg-primary" />
+          ))}
+        </span>
+        <span class="type-small text-soft-foreground">{seats.label}</span>
+      </p>
+      <p class="type-body-sm mt-6 text-muted-foreground">{seats.description}</p>
+      <div class="mt-10 lg:mt-auto">
+        <Button href={seats.action.href}>{seats.action.label}</Button>
+      </div>
+    </div>
+  </div>
+</Section>

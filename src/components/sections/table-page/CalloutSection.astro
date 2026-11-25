@@ -1,0 +1,24 @@
+---
+import { CalendarCheck } from '@lucide/astro';
+import Section from '@/components/layout/Section.astro';
+import Button from '@/components/ui/Button.astro';
+import HighlightTitle from '@/components/ui/HighlightTitle.astro';
+import Pill from '@/components/ui/Pill.astro';
+import { callout } from '@/config/content/table-page';
+
+const { eyebrow, kicker, title, action } = callout;
+---
+
+<Section>
+  <div class="flex flex-col items-center rounded-2xl bg-card px-6 py-14 text-center md:py-20" data-reveal>
+    <Pill>
+      <CalendarCheck slot="icon" class="size-4 text-primary" aria-hidden="true" />
+      {eyebrow}
+    </Pill>
+    <p class="type-body mt-6 text-soft-foreground">{kicker}</p>
+    <HighlightTitle parts={title} class="type-heading-sm mt-3 max-w-lead text-foreground" />
+    <div class="mt-8">
+      <Button href={action.href}>{action.label}</Button>
+    </div>
+  </div>
+</Section>

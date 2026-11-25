@@ -1,0 +1,26 @@
+---
+import { Check } from '@lucide/astro';
+import Section from '@/components/layout/Section.astro';
+import { cycleOutcome } from '@/config/content/table-page';
+
+const { id, title, lead, items } = cycleOutcome;
+---
+
+<Section id={id}>
+  <h2 class="type-section max-w-[37.5rem] text-foreground" data-reveal>
+    {title}
+  </h2>
+  <p class="type-lead mt-4 text-soft-foreground" data-reveal>
+    {lead}
+  </p>
+  <ul class="mt-10 grid gap-2 md:grid-cols-2 lg:grid-cols-3">
+    {items.map((item) => (
+      <li class="type-title flex items-center gap-3 rounded-2xl bg-card px-5 py-6 text-foreground" data-reveal>
+        <span class="grid size-6 shrink-0 place-items-center rounded-full bg-highlight-deep/50 text-primary">
+          <Check class="size-3.5" aria-hidden="true" />
+        </span>
+        {item}
+      </li>
+    ))}
+  </ul>
+</Section>

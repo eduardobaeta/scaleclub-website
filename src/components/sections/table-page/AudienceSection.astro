@@ -1,0 +1,70 @@
+---
+import Section from '@/components/layout/Section.astro';
+import CheckList from '@/components/ui/CheckList.astro';
+import Tag from '@/components/ui/Tag.astro';
+import { audience } from '@/config/content/table-page';
+
+const { id, title, lead, items, decisionSheet, examplesTitle, examples } = audience;
+const { progress } = decisionSheet;
+const meetings = Array.from({ length: progress.total }, (_, index) => index + 1);
+---
+
+<Section id={id}>
+  <div class="grid gap-12 lg:grid-cols-[1fr_27.5rem] lg:items-center">
+    <div>
+      <h2 class="type-section text-foreground" data-reveal>
+        {title}
+      </h2>
+      <p class="type-lead mt-4 text-soft-foreground" data-reveal>
+        {lead}
+      </p>
+      <CheckList items={items} class="mt-8 space-y-3" itemClass="type-lead text-soft-foreground" />
+    </div>
+    <figure class="rounded-2xl bg-card p-7" data-reveal>
+      <figcaption>
+        <Tag>{decisionSheet.status}</Tag>
+        <span class="type-step-title mt-4 block text-foreground">{decisionSheet.title}</span>
+      </figcaption>
+      <dl class="mt-5 divide-y divide-border">
+        {decisionSheet.rows.map((row) => (
+          <div class="grid grid-cols-[6rem_1fr] gap-3 py-3">
+            <dt class="type-caption font-medium text-subtle-foreground">{row.label}</dt>
+            <dd class:list={['type-body font-medium', row.highlight ? 'text-primary' : 'text-foreground']}>
+              {row.value}
+            </dd>
+          </div>
+        ))}
+      </dl>
+      <div class="mt-4 flex items-center justify-between">
+        <span class="type-caption font-medium text-subtle-foreground">{progress.label}</span>
+        <span class="type-caption font-medium text-soft-foreground">
+          {progress.unit} <span class="text-primary">{progress.current}</span> de {progress.total}
+        </span>
+      </div>
+      <ol class="mt-2.5 grid grid-cols-6 gap-1.5" aria-hidden="true">
+        {meetings.map((meeting) => (
+          <li
+            class:list={[
+              'h-1 rounded-full',
+              meeting < progress.current ? 'bg-primary' : meeting === progress.current ? 'bg-step-1' : 'bg-accent',
+            ]}
+          />
+        ))}
+      </ol>
+    </figure>
+  </div>
+
+  <div class="mt-16 border-t border-border pt-12 lg:mt-20">
+    <h3 class="type-quote text-foreground" data-reveal>
+      {examplesTitle}
+    </h3>
+    <ul class="mt-8 grid gap-2 md:grid-cols-2 lg:grid-cols-3">
+      {examples.map((example) => (
+        <li class="min-h-[12.5rem] rounded-2xl bg-card p-7" data-reveal>
+          <Tag>{example.area}</Tag>
+          <blockquote class="type-quote mt-8 text-foreground">{example.quote}</blockquote>
+        </li>
+      ))}
+    </ul>
+  </div>
+</Section>
