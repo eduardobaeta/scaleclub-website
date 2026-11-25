@@ -1,0 +1,36 @@
+---
+import { leadEndpoints } from '@/config/routes';
+import type { LeadType } from '../domain/lead';
+import FormStatus from './FormStatus.astro';
+import Honeypot from './Honeypot.astro';
+
+interface Props {
+  type: LeadType;
+  statusId: string;
+  messages: { success: string; invalid: string; rateLimited: string; error: string };
+  class?: string;
+  statusClass?: string;
+}
+
+const { type, statusId, messages, class: className, statusClass } = Astro.props;
+---
+
+<form
+  method="POST"
+  action={leadEndpoints[type]}
+  class:list={['relative', className]}
+  data-lead-form={type}
+  data-message-success={messages.success}
+  data-message-invalid={messages.invalid}
+  data-message-rate-limited={messages.rateLimited}
+  data-message-error={messages.error}
+>
+  <slot />
+  <Honeypot />
+  <FormStatus id={statusId} class={statusClass} />
+</form>
+
+<script>
+  import { enhanceLeadForms } from './enhance-lead-forms';
+  enhanceLeadForms('[data-lead-form]');
+</script>

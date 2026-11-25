@@ -1,0 +1,35 @@
+---
+import Button from '@/components/ui/Button.astro';
+import ConsentField from '@/components/ui/ConsentField.astro';
+import TextField from '@/components/ui/TextField.astro';
+import { meetingRequestForm } from '@/config/forms';
+import LeadForm from './LeadForm.astro';
+
+const { fields, consent, submitLabel, messages } = meetingRequestForm;
+---
+
+<LeadForm type="meeting-request" statusId="meeting-status" messages={messages} class="flex flex-col gap-3">
+  <TextField
+    id="meeting-name"
+    name="name"
+    autocomplete="name"
+    required
+    minlength={2}
+    maxlength={120}
+    {...fields.name}
+  />
+  <TextField
+    id="meeting-email"
+    name="email"
+    type="email"
+    autocomplete="email"
+    required
+    maxlength={254}
+    {...fields.email}
+  />
+  <TextField id="meeting-whatsapp" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel" {...fields.whatsapp} />
+  <ConsentField id="meeting-consent" name="consent" {...consent} />
+  <Button type="submit" variant="solid" size="lg" block class="mt-2">
+    {submitLabel}
+  </Button>
+</LeadForm>

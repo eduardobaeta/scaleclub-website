@@ -1,0 +1,71 @@
+---
+import Button from '@/components/ui/Button.astro';
+import ConsentField from '@/components/ui/ConsentField.astro';
+import RadioCards from '@/components/ui/RadioCards.astro';
+import TextAreaField from '@/components/ui/TextAreaField.astro';
+import TextField from '@/components/ui/TextField.astro';
+import { mentoringApplicationForm } from '@/config/forms';
+import LeadForm from './LeadForm.astro';
+
+const { fields, submitLabel, messages } = mentoringApplicationForm;
+---
+
+<LeadForm type="mentoring-application" statusId="mentoring-status" messages={messages} class="flex flex-col gap-3">
+  <TextField
+    id="mentoring-name"
+    name="name"
+    autocomplete="name"
+    required
+    minlength={2}
+    maxlength={120}
+    {...fields.name}
+  />
+  <TextField
+    id="mentoring-email"
+    name="email"
+    type="email"
+    autocomplete="email"
+    required
+    maxlength={254}
+    {...fields.email}
+  />
+  <TextField
+    id="mentoring-whatsapp"
+    name="whatsapp"
+    type="tel"
+    inputmode="tel"
+    autocomplete="tel"
+    required
+    {...fields.whatsapp}
+  />
+  <div class="grid grid-cols-2 gap-3">
+    <TextField
+      id="mentoring-company"
+      name="company"
+      autocomplete="organization"
+      required
+      maxlength={160}
+      {...fields.company}
+    />
+    <TextField
+      id="mentoring-role"
+      name="role"
+      autocomplete="organization-title"
+      required
+      maxlength={120}
+      {...fields.role}
+    />
+  </div>
+  <RadioCards
+    id="mentoring-teamSize"
+    name="teamSize"
+    legend={fields.teamSize.label}
+    options={fields.teamSize.options}
+    error={fields.teamSize.error}
+  />
+  <TextAreaField id="mentoring-problem" name="problem" maxlength={1000} {...fields.problem} />
+  <ConsentField id="mentoring-consent" name="consent" {...fields.consent} />
+  <Button type="submit" variant="solid" size="lg" block class="mt-1">
+    {submitLabel}
+  </Button>
+</LeadForm>

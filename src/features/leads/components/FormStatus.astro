@@ -1,0 +1,15 @@
+---
+interface Props {
+  id: string;
+  class?: string;
+}
+
+const { id, class: className } = Astro.props;
+---
+
+<p
+  id={id}
+  class:list={['type-small font-medium text-foreground empty:hidden', className]}
+  role="status"
+  data-form-status
+></p>

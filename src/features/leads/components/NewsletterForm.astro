@@ -1,0 +1,27 @@
+---
+import Button from '@/components/ui/Button.astro';
+import TextField from '@/components/ui/TextField.astro';
+import { newsletterForm } from '@/config/forms';
+import LeadForm from './LeadForm.astro';
+
+const { email, submitLabel, messages } = newsletterForm;
+---
+
+<LeadForm type="newsletter-subscription" statusId="newsletter-status" messages={messages} statusClass="mt-3">
+  <div class="flex items-start gap-2">
+    <TextField
+      id="newsletter-email"
+      name="email"
+      type="email"
+      autocomplete="email"
+      required
+      maxlength={254}
+      hideLabel
+      class="flex-1"
+      {...email}
+    />
+    <Button type="submit" class="h-11 shrink-0">
+      {submitLabel}
+    </Button>
+  </div>
+</LeadForm>
