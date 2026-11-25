@@ -1,0 +1,63 @@
+---
+import { createHash } from 'node:crypto';
+import { Font } from 'astro:assets';
+import '@/styles/globals.css';
+import { isIndexable } from '@/config/deployment';
+import { interfaceText, siteConfig } from '@/config/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+  noindex?: boolean;
+}
+
+const { title = siteConfig.title, description = siteConfig.description, noindex = false } = Astro.props;
+
+const canonicalUrl = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined;
+const robots = isIndexable && !noindex ? 'index, follow' : 'noindex, nofollow';
+
+// Inline so the class exists before first paint; Astro does not hash is:inline scripts, so the CSP gets it here.
+const markScriptsEnabled = "document.documentElement.classList.add('js');";
+Astro.csp?.insertScriptHash(`sha256-${createHash('sha256').update(markScriptsEnabled).digest('base64')}`);
+---
+
+<!doctype html>
+<html lang={siteConfig.language}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content={robots} />
+    {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+    <meta name="theme-color" content={siteConfig.themeColor} />
+    <meta name="generator" content={Astro.generator} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={siteConfig.name} />
+    <meta property="og:locale" content={siteConfig.openGraphLocale} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
+    <meta name="twitter:card" content="summary" />
+
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <Font cssVariable="--font-brand" preload={[{ weight: 500 }, { weight: 600 }]} />
+    <script is:inline set:html={markScriptsEnabled} />
+  </head>
+  <body>
+    <a
+      href="#main-content"
+      class="type-button sr-only z-30 rounded-full bg-primary px-5 py-3 text-primary-foreground focus:not-sr-only focus:fixed focus:top-4 focus:left-4"
+    >
+      {interfaceText.skipToContent}
+    </a>
+    <slot />
+
+    <script>
+      import { initMotion } from '@/scripts/motion';
+      initMotion();
+    </script>
+  </body>
+</html>

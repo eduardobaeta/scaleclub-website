@@ -1,0 +1,120 @@
+---
+import { Menu } from '@lucide/astro';
+import Button from '@/components/ui/Button.astro';
+import { interfaceText, type SiteNavigation } from '@/config/site';
+import BrandLockup from './BrandLockup.astro';
+
+interface Props {
+  navigation: SiteNavigation;
+  hideOnScroll?: boolean;
+}
+
+const { navigation, hideOnScroll = false } = Astro.props;
+const { items, callToAction } = navigation;
+---
+
+<header
+  class="fixed inset-x-0 top-0 z-30 bg-background/35 backdrop-blur-xl transition-transform duration-500 ease-(--easing-standard) focus-within:translate-y-0 data-[hidden=true]:-translate-y-full data-[hidden=true]:focus-within:translate-y-0"
+  data-site-header
+  data-hide-on-scroll={hideOnScroll ? '' : undefined}
+>
+  <div class="container-site flex h-(--header-height) items-center justify-between gap-6 lg:px-[120px]">
+    <a href="/" aria-label={interfaceText.homeLink} class="shrink-0">
+      <BrandLockup compactOnPhone />
+    </a>
+
+    <nav aria-label={interfaceText.primaryNavigation} class="max-lg:hidden">
+      <ul class="flex items-center gap-10">
+        {items.map((item) => (
+          <li>
+            <a href={item.href} class="type-nav text-foreground/70 transition-colors hover:text-foreground">
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <Button href={callToAction.href} external={callToAction.external} class="max-md:hidden">
+        {callToAction.label}
+      </Button>
+
+      <div class="relative lg:hidden">
+        <button
+          type="button"
+          class="grid size-11 place-items-center rounded-full bg-accent text-foreground"
+          aria-expanded="false"
+          aria-controls="site-menu"
+          aria-label={interfaceText.openMenu}
+          data-label-open={interfaceText.openMenu}
+          data-label-close={interfaceText.closeMenu}
+          data-menu-toggle
+        >
+          <Menu class="size-5 in-aria-expanded:hidden" aria-hidden="true" />
+          <span class="hidden size-3.5 rounded-full bg-primary in-aria-expanded:block" aria-hidden="true"></span>
+        </button>
+
+        <nav
+          id="site-menu"
+          aria-label={interfaceText.primaryNavigation}
+          class="absolute top-full right-0 mt-3 hidden w-[min(18.75rem,calc(100vw-50px))] rounded-xl border border-border bg-popover p-3 data-[open=true]:block"
+          data-menu
+        >
+          <ul>
+            {items.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  class="type-title block rounded-lg px-3 py-3 text-foreground hover:bg-accent"
+                  data-menu-link
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))}
+            <li class="mt-2 md:hidden">
+              <Button href={callToAction.href} external={callToAction.external} block data-menu-link>
+                {callToAction.label}
+              </Button>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  const HIDE_AFTER_PX = 420;
+  const header = document.querySelector<HTMLElement>('[data-site-header]');
+  if (header?.hasAttribute('data-hide-on-scroll')) {
+    const update = () => (header.dataset.hidden = String(window.scrollY > HIDE_AFTER_PX));
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+  }
+
+  const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  const menu = document.querySelector<HTMLElement>('[data-menu]');
+
+  if (toggle && menu) {
+    const setOpen = (open: boolean) => {
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', (open ? toggle.dataset.labelClose : toggle.dataset.labelOpen) ?? '');
+      menu.dataset.open = String(open);
+    };
+
+    toggle.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
+    menu.querySelectorAll('[data-menu-link]').forEach((link) => link.addEventListener('click', () => setOpen(false)));
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+    document.addEventListener('click', (event) => {
+      const target = event.target as Node;
+      if (!menu.contains(target) && !toggle.contains(target)) setOpen(false);
+    });
+  }
+</script>

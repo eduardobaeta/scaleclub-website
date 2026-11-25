@@ -1,0 +1,22 @@
+---
+import { Image } from 'astro:assets';
+import { brandLockup } from '@/config/site';
+
+interface Props {
+  compactOnPhone?: boolean;
+}
+
+const { compactOnPhone = false } = Astro.props;
+---
+
+<span class="flex items-center gap-6">
+  <Image src={brandLockup.primary.src} alt={brandLockup.primary.alt} width={92} class="h-9 w-auto" loading="eager" />
+  <span class:list={['h-7 w-px bg-border', compactOnPhone && 'max-md:hidden']} aria-hidden="true"></span>
+  <Image
+    src={brandLockup.secondary.src}
+    alt={brandLockup.secondary.alt}
+    width={40}
+    class:list={['h-6.5 w-auto', compactOnPhone && 'max-md:hidden']}
+    loading="eager"
+  />
+</span>

@@ -1,0 +1,31 @@
+---
+import BackToTop from '@/components/layout/BackToTop.astro';
+import SiteFooter from '@/components/layout/SiteFooter.astro';
+import SiteHeader from '@/components/layout/SiteHeader.astro';
+import type { SiteNavigation } from '@/config/site';
+import { NewsletterForm } from '@/features/leads';
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  navigation: SiteNavigation;
+  noindex?: boolean;
+  hideHeaderOnScroll?: boolean;
+}
+
+const { title, description, navigation, noindex, hideHeaderOnScroll } = Astro.props;
+---
+
+<BaseLayout title={title} description={description} noindex={noindex}>
+  <SiteHeader navigation={navigation} hideOnScroll={hideHeaderOnScroll} />
+  <div class="relative">
+    <main id="main-content">
+      <slot />
+    </main>
+    <SiteFooter>
+      <NewsletterForm slot="newsletter" />
+    </SiteFooter>
+  </div>
+  <BackToTop />
+</BaseLayout>

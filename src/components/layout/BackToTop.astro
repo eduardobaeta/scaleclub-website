@@ -1,0 +1,28 @@
+---
+import { ArrowUp } from '@lucide/astro';
+import { interfaceText } from '@/config/site';
+---
+
+<a
+  href="#top"
+  class="fixed bottom-4 left-4 z-20 grid size-11 translate-y-4 place-items-center rounded-full bg-accent text-foreground opacity-0 transition duration-300 data-[visible=true]:translate-y-0 data-[visible=true]:opacity-100 md:left-8 md:size-12"
+  aria-label={interfaceText.backToTop}
+  data-back-to-top
+  tabindex="-1"
+>
+  <ArrowUp class="size-4" aria-hidden="true" />
+</a>
+
+<script>
+  const SHOW_AFTER_PX = 600;
+  const link = document.querySelector<HTMLAnchorElement>('[data-back-to-top]');
+  if (link) {
+    const update = () => {
+      const visible = window.scrollY > SHOW_AFTER_PX;
+      link.dataset.visible = String(visible);
+      link.tabIndex = visible ? 0 : -1;
+    };
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+  }
+</script>
