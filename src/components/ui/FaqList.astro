@@ -1,0 +1,23 @@
+---
+import { Plus } from '@lucide/astro';
+
+interface Props {
+  items: readonly { question: string; answer: string }[];
+}
+
+const { items } = Astro.props;
+---
+
+<ul class="border-t border-border">
+  {items.map((item, index) => (
+    <li class="border-b border-border">
+      <details class="disclosure group" open={index === 0}>
+        <summary class="type-title flex cursor-pointer list-none items-center justify-between gap-6 px-0 py-5 text-foreground md:px-6 [&::-webkit-details-marker]:hidden">
+          <h3>{item.question}</h3>
+          <Plus class="size-4 shrink-0 transition-transform duration-300 group-open:rotate-45" aria-hidden="true" />
+        </summary>
+        <p class="type-body max-w-lead pb-6 text-muted-foreground md:px-6">{item.answer}</p>
+      </details>
+    </li>
+  ))}
+</ul>

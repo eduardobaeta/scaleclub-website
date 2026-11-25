@@ -1,0 +1,63 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { ArrowUpRight } from '@lucide/astro';
+
+interface CommonProps {
+  variant?: 'arrow' | 'solid';
+  size?: 'sm' | 'md' | 'lg';
+  block?: boolean;
+  type?: 'button' | 'submit';
+  external?: boolean;
+}
+
+type LinkProps = CommonProps & Omit<HTMLAttributes<'a'>, 'href' | 'type'> & { href: string };
+type ButtonProps = CommonProps & Omit<HTMLAttributes<'button'>, 'type'> & { href?: never };
+type Props = LinkProps | ButtonProps;
+
+// Astro renders duplicated attributes instead of overriding them, so `type` is resolved here, not in a spread.
+const {
+  variant = 'arrow',
+  size = 'md',
+  block = false,
+  type = 'button',
+  external = false,
+  class: className,
+  ...attributes
+} = Astro.props;
+
+const sizeClasses = {
+  arrow: { sm: 'h-8 pl-3.5 pr-1 gap-2.5', md: 'h-9.5 pl-4.5 pr-1 gap-3', lg: 'h-11 pl-5 pr-1.5 gap-3' },
+  solid: { sm: 'h-9 px-4', md: 'h-11 px-5', lg: 'h-12 px-6' },
+};
+const circleClasses = { sm: 'size-6', md: 'size-7.5', lg: 'size-8' };
+
+const classes = [
+  'inline-flex items-center rounded-full bg-primary text-primary-foreground whitespace-nowrap transition-[filter,opacity] duration-200 hover:brightness-110',
+  'disabled:pointer-events-none disabled:opacity-60 aria-busy:pointer-events-none aria-busy:opacity-60',
+  size === 'lg' && variant === 'solid' ? 'type-button-lg' : 'type-button',
+  sizeClasses[variant][size],
+  block && 'w-full justify-center',
+  className,
+];
+const externalAttributes = external ? { target: '_blank', rel: 'noopener noreferrer' } : {};
+---
+
+{'href' in attributes && attributes.href !== undefined ? (
+  <a class:list={classes} {...externalAttributes} {...attributes}>
+    <slot />
+    {variant === 'arrow' && (
+      <span class:list={['grid place-items-center rounded-full bg-foreground text-background', circleClasses[size]]}>
+        <ArrowUpRight class="size-4" aria-hidden="true" />
+      </span>
+    )}
+  </a>
+) : (
+  <button type={type} class:list={classes} {...attributes}>
+    <slot />
+    {variant === 'arrow' && (
+      <span class:list={['grid place-items-center rounded-full bg-foreground text-background', circleClasses[size]]}>
+        <ArrowUpRight class="size-4" aria-hidden="true" />
+      </span>
+    )}
+  </button>
+)}

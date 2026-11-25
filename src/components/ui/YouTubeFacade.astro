@@ -1,0 +1,51 @@
+---
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+import { Play } from '@lucide/astro';
+
+interface Props {
+  videoId: string;
+  title: string;
+  poster: ImageMetadata;
+  playLabel: string;
+}
+
+const { videoId, title, poster, playLabel } = Astro.props;
+---
+
+<div
+  class="relative aspect-video overflow-hidden rounded-2xl bg-card"
+  data-youtube={videoId}
+  data-youtube-title={title}
+>
+  <button type="button" class="group absolute inset-0 grid size-full place-items-center" data-youtube-play>
+    <Image
+      src={poster}
+      alt=""
+      widths={[640, 1280]}
+      sizes="(min-width: 1200px) 1220px, 100vw"
+      class="absolute inset-0 size-full object-cover"
+    />
+    <span class="relative grid size-16 place-items-center rounded-2xl bg-background/80 text-foreground transition group-hover:bg-primary group-hover:text-primary-foreground">
+      <Play class="size-6 fill-current" aria-hidden="true" />
+    </span>
+    <span class="sr-only">
+      {playLabel}: {title}
+    </span>
+  </button>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-youtube]').forEach((container) => {
+    container.querySelector('[data-youtube-play]')?.addEventListener('click', () => {
+      const frame = document.createElement('iframe');
+      frame.src = `https://www.youtube-nocookie.com/embed/${container.dataset.youtube}?autoplay=1&rel=0&modestbranding=1&playsinline=1`;
+      frame.title = container.dataset.youtubeTitle ?? '';
+      frame.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+      frame.allowFullscreen = true;
+      frame.className = 'absolute inset-0 size-full';
+      container.replaceChildren(frame);
+      frame.focus();
+    });
+  });
+</script>

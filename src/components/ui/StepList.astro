@@ -1,0 +1,21 @@
+---
+interface Props {
+  steps: readonly { title: string; description: string }[];
+}
+
+const { steps } = Astro.props;
+---
+
+<ol class="divide-y divide-border">
+  {steps.map((step, index) => (
+    <li class="flex gap-4 py-5" data-reveal>
+      <span class="type-badge grid size-6 shrink-0 place-items-center rounded-full bg-highlight-deep/50 text-primary">
+        {index + 1}
+      </span>
+      <span>
+        <span class="type-step-title block text-foreground">{step.title}</span>
+        <span class="type-body-sm mt-1 block text-muted-foreground">{step.description}</span>
+      </span>
+    </li>
+  ))}
+</ol>

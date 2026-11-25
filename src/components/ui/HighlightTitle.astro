@@ -1,0 +1,22 @@
+---
+import type { TitlePart } from '@/components/types';
+
+interface Props extends Record<`data-${string}`, string | boolean | undefined> {
+  parts: readonly TitlePart[];
+  as?: 'h1' | 'h2' | 'h3';
+  class?: string;
+  breakBeforeHighlight?: boolean;
+}
+
+const { parts, as: Tag = 'h2', class: className, breakBeforeHighlight = false, ...attributes } = Astro.props;
+---
+
+<Tag class={className} {...attributes}>
+  {parts.map((part) =>
+    part.highlight ? (
+      <span class:list={['text-primary', breakBeforeHighlight && 'block']}>{part.text}</span>
+    ) : (
+      <span class:list={[breakBeforeHighlight && 'block max-w-[11ch]']}>{part.text}</span>
+    ),
+  )}
+</Tag>

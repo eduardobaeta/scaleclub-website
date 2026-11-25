@@ -1,0 +1,24 @@
+---
+import HighlightTitle from '@/components/ui/HighlightTitle.astro';
+import Pill from '@/components/ui/Pill.astro';
+import type { TitlePart } from '@/components/types';
+
+interface Props {
+  eyebrow?: string;
+  title: readonly TitlePart[];
+  lead?: string;
+}
+
+const { eyebrow, title, lead } = Astro.props;
+---
+
+<div class="max-w-[56.25rem]" data-reveal>
+  {eyebrow && (
+    <Pill class="mb-6">
+      <slot name="icon" slot="icon" />
+      {eyebrow}
+    </Pill>
+  )}
+  <HighlightTitle parts={title} class="type-section text-foreground" />
+  {lead && <p class="type-lead mt-4 max-w-copy text-soft-foreground">{lead}</p>}
+</div>

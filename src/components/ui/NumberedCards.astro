@@ -1,0 +1,18 @@
+---
+interface Props {
+  items: readonly { title: string; description: string }[];
+  columns?: 3 | 4;
+}
+
+const { items, columns = 4 } = Astro.props;
+---
+
+<ol class:list={['grid gap-2 md:grid-cols-2', columns === 3 ? 'lg:grid-cols-3' : 'lg:grid-cols-4']}>
+  {items.map((item, index) => (
+    <li class="flex min-h-48 flex-col rounded-2xl bg-card p-7" data-reveal>
+      <span class="type-button text-primary">{String(index + 1).padStart(2, '0')}</span>
+      <h3 class="type-card-title mt-auto pt-10 text-foreground">{item.title}</h3>
+      <p class="type-body mt-2.5 text-muted-foreground">{item.description}</p>
+    </li>
+  ))}
+</ol>

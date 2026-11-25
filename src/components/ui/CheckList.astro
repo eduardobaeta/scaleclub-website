@@ -1,0 +1,29 @@
+---
+import { Check } from '@lucide/astro';
+
+interface Props {
+  items: readonly string[];
+  variant?: 'solid' | 'soft' | 'plain';
+  class?: string;
+  itemClass?: string;
+}
+
+const { items, variant = 'solid', class: className, itemClass = 'type-body text-soft-foreground' } = Astro.props;
+
+const markClasses = {
+  solid: 'grid size-6 shrink-0 place-items-center rounded-full bg-primary text-primary-foreground',
+  soft: 'grid size-6 shrink-0 place-items-center rounded-full bg-highlight-deep/50 text-primary',
+  plain: 'shrink-0 text-primary',
+};
+---
+
+<ul class={className}>
+  {items.map((item) => (
+    <li class:list={['flex items-center gap-3', itemClass]}>
+      <span class={markClasses[variant]}>
+        <Check class={variant === 'plain' ? 'size-4' : 'size-3.5'} aria-hidden="true" />
+      </span>
+      {item}
+    </li>
+  ))}
+</ul>

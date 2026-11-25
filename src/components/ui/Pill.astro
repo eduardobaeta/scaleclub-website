@@ -1,0 +1,18 @@
+---
+interface Props extends Record<`data-${string}`, string | boolean | undefined> {
+  class?: string;
+}
+
+const { class: className, ...attributes } = Astro.props;
+---
+
+<p
+  class:list={[
+    'type-eyebrow inline-flex items-center gap-2 rounded-full bg-muted px-3 py-2 text-soft-foreground',
+    className,
+  ]}
+  {...attributes}
+>
+  <slot name="icon" />
+  <slot />
+</p>
