@@ -29,6 +29,7 @@
     "@upstash/ratelimit": "^2.2.1",
     "@upstash/redis": "^1.41.0",
     "astro": "^7.4.13",
+    "axios": "1.21.1",
     "gsap": "^3.15.1",
     "tailwindcss": "^4.3.5"
   },
@@ -42,6 +43,7 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-astro": "^3.2.1",
     "globals": "^17.14.0",
+    "msw": "3.0.7",
     "prettier": "^3.10.1",
     "prettier-plugin-astro": "^1.1.2",
     "prettier-plugin-tailwindcss": "^0.8.1",
