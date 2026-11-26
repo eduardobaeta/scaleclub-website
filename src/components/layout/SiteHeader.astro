@@ -113,8 +113,9 @@ const { items, callToAction } = navigation;
       }
     });
     document.addEventListener('click', (event) => {
-      const target = event.target as Node;
-      if (!menu.contains(target) && !toggle.contains(target)) setOpen(false);
+      const { target } = event;
+      if (!(target instanceof Node) || menu.contains(target) || toggle.contains(target)) return;
+      setOpen(false);
     });
   }
 </script>
