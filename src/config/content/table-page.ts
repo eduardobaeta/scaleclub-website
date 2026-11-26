@@ -1,4 +1,6 @@
 import type { LinkItem, TitlePart } from '@/components/types';
+import { formatBrl } from '@/lib/currency';
+import { tablePriceBrl } from '../prices';
 import { routes, sectionLink } from '../routes';
 import type { SiteNavigation } from '../site';
 
@@ -38,7 +40,7 @@ export const offer = {
   period: '1 mês',
   monthlySeats: 4,
   installments: { count: '12x', value: 'R$ 399,99' },
-  cashPrice: 'R$ 4.500,00',
+  cashPrice: formatBrl(tablePriceBrl, { cents: true }),
   guarantee: 'Garantia nos 2 primeiros encontros: se não fizer sentido, devolvemos o valor.',
   firstMeetingNote: 'Você agenda o primeiro encontro antes de fechar.',
 };
