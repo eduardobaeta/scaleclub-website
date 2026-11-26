@@ -21,8 +21,8 @@ export default defineConfig({
     // --ignore-lock: run alongside a developer's own `astro dev` and stay in the foreground.
     command: `bun run astro dev --port ${PORT} --ignore-lock`,
     url: BASE_URL,
-    // A fixed origin makes canonical and social metadata testable.
-    env: { E2E_TEST: 'true', SITE_URL: 'https://site.example' },
+    // A fixed origin makes canonical and social metadata testable; blank provider tokens keep tests off the real CRM.
+    env: { E2E_TEST: 'true', SITE_URL: 'https://site.example', ATTIO_API_TOKEN: '', BREVO_API_TOKEN: '' },
     reuseExistingServer: false,
     timeout: 120_000,
   },

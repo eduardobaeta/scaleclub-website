@@ -17,4 +17,4 @@ bun run test:e2e   # Playwright (first run: bunx playwright install chromium)
 - Case studies: `src/content/cases/*.md`
 - Brand tokens and decisions: `src/styles/` and `docs/brand.md`
 
-The forms are ready but have no destination yet: connect one in `src/features/leads/integrations/`.
+Form leads go to Attio (CRM) and Brevo (e-mail): see `docs/integrations/leads.md` and `.env.example`.

@@ -10,3 +10,4 @@ bun.lock
 AGENTS.md
 CLAUDE.md
 docs/*.md
+docs/integrations/*.html

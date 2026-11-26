@@ -59,6 +59,12 @@ export default defineConfig({
     schema: {
       UPSTASH_REDIS_REST_URL: envField.string({ context: 'server', access: 'secret', optional: true, url: true }),
       UPSTASH_REDIS_REST_TOKEN: envField.string({ context: 'server', access: 'secret', optional: true }),
+      ATTIO_API_TOKEN: envField.string({ context: 'server', access: 'secret', optional: true }),
+      ATTIO_DEAL_OWNER_EMAIL: envField.string({ context: 'server', access: 'secret', optional: true }),
+      BREVO_API_TOKEN: envField.string({ context: 'server', access: 'secret', optional: true }),
+      BREVO_EBOOK_LIST_ID: envField.number({ context: 'server', access: 'secret', optional: true, int: true }),
+      BREVO_NEWSLETTER_LIST_ID: envField.number({ context: 'server', access: 'secret', optional: true, int: true }),
+      BREVO_EBOOK_TEMPLATE_ID: envField.number({ context: 'server', access: 'secret', optional: true, int: true }),
       VERCEL_ENV: envField.enum({
         context: 'server',
         access: 'public',
